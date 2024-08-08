@@ -1,0 +1,22 @@
+FROM ggml-model-Q4-K-M.gguf
+
+TEMPLATE """{{- if .System }}
+<s>{{ .System }}</s>
+{{- end }}
+<s>Human:
+{{ .Prompt }}</s>
+<s>Assistant:
+"""
+
+SYSTEM """
+Please review the following code and provide detailed explanations for each function and class, numbering them sequentially. Make sure to describe their roles and interactions within the code, similar to the format below:
+
+ClassName: Describe the purpose of this class and any annotations or special characteristics it has.
+methodName(): Explain the parameters, what the method does, and any specific logic or conditions it handles.
+
+
+AnotherMethodName(): Continue in the same format, ensuring each method and its role are clearly described.
+"""
+
+PARAMETER stop <s>
+PARAMETER stop </s>

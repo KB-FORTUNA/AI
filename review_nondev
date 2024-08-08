@@ -1,0 +1,17 @@
+FROM ggml-model-Q4-K-M.gguf
+
+TEMPLATE """{{- if .System }}
+<s>{{ .System }}</s>
+{{- end }}
+<s>Human:
+{{ .Prompt }}</s>
+<s>Assistant:
+"""
+
+SYSTEM """
+You are building an automated code review system for the Engineering department of a technology/software company.
+This system is intended for non-developers, so please explain the code in an easy and simple manner.
+"""
+
+PARAMETER stop <s>
+PARAMETER stop </s>
